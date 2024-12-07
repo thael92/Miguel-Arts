@@ -1,14 +1,4 @@
-// Sticky Plugin v1.0.3 for jQuery
-// =============
-// Author: Anthony Garand
-// Improvements by German M. Bravo (Kronuz) and Ruud Kamphuis (ruudk)
-// Improvements by Leonardo C. Daronco (daronco)
-// Created: 02/14/2011
-// Date: 07/20/2015
-// Website: http://stickyjs.com/
-// Description: Makes an element on the page stick on the screen as you scroll
-//              It will only set the 'top' and 'position' of your element, you
-//              might need to adjust the width in some cases.
+
 
 (function($) {
     var slice = Array.prototype.slice; // save ref to original slice()
@@ -217,3 +207,36 @@
 $(document).ready(function(){
       $(".navbar").sticky({topSpacing:0});
     });
+
+    // Função para rolagem suave quando clicar no menu
+$(document).ready(function() {
+  // Adicionando classe ativa ao clicar em cada link do menu
+  $('.navbar-nav .nav-link').on('click', function(event) {
+      event.preventDefault();  // Previne o comportamento padrão de navegação
+
+      // Remover a classe 'active' de todos os links
+      $('.navbar-nav .nav-item').removeClass('active');
+
+      // Adicionar a classe 'active' ao link clicado
+      $(this).parent().addClass('active');
+
+      // Realizar rolagem suave para a seção correspondente
+      var target = $(this).attr('href'); // Obtém o ID da seção
+      $('html, body').animate({
+          scrollTop: $(target).offset().top - 86  // Ajusta para compensar o cabeçalho
+      }, 1000);  // 1000 é a duração da animação em milissegundos
+  });
+
+  // Função para adicionar a classe ativa à medida que o usuário rola pela página
+  $(window).on('scroll', function() {
+      var scrollPos = $(document).scrollTop();  // Posição atual da rolagem
+      $('.navbar-nav .nav-link').each(function() {
+          var currLink = $(this);
+          var refElement = $(currLink.attr("href"));
+          if (refElement.position().top - 90 <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+              $('.navbar-nav .nav-item').removeClass("active");
+              currLink.parent().addClass("active");
+          }
+      });
+  });
+});

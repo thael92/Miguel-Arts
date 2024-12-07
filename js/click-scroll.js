@@ -26,26 +26,3 @@ $(document).ready(function(){
         });
     });
 });
-// Inicializar o carrossel usando JavaScript
-document.addEventListener('DOMContentLoaded', function() {
-    // Selecione o carrossel
-    var myCarousel = document.getElementById('carouselExampleCaptions');
-    
-    // Inicialize o carrossel do Bootstrap 5
-    var carousel = new bootstrap.Carousel(myCarousel, {
-        interval: 3000, // Tempo de intervalo entre as transições (em milissegundos)
-        ride: 'carousel' // Faz o carrossel começar automaticamente
-    });
-
-    // Adicionando funcionalidade aos botões de navegação
-    var prevButton = document.querySelector('.carousel-control-prev');
-    var nextButton = document.querySelector('.carousel-control-next');
-    
-    prevButton.addEventListener('click', function() {
-        carousel.prev();
-    });
-
-    nextButton.addEventListener('click', function() {
-        carousel.next();
-    });
-});
